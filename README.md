@@ -1,4 +1,5 @@
 ### springboot 配置服务代理
+CSDN博客地址    [凌大大博客](https://blog.csdn.net/wohaqiyi/article/details/81327512)
 &emsp;&emsp;有时候，我们可能有下边这样的需求：
 ![image](https://github.com/lingshufeng/images/blob/master/images/1.png)
 即，针对于分布式服务，我们会有多种业务接口服务，但是服务器上可能只要求开放一个服务的端口，比如上图的`restA`项目端口是对外开放的，但是`restB`项目端口并未对外开放，这样带来的问题就是，用户无法直接请求`restB`项目。
