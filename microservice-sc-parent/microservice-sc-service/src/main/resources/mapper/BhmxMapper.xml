@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="microservice.sc.mapper.BhmxMapper" >
+  <resultMap id="BaseResultMap" type="microservice.sc.model.Bhmx" >
+    <result column="BH" property="bh" jdbcType="VARCHAR" />
+    <result column="MC" property="mc" jdbcType="VARCHAR" />
+    <result column="PIC" property="pic" jdbcType="VARCHAR" />
+    <result column="BINGY" property="bingy" jdbcType="VARCHAR" />
+    <result column="ZZ" property="zz" jdbcType="VARCHAR" />
+    <result column="FBTJ" property="fbtj" jdbcType="VARCHAR" />
+    <result column="NYFZ" property="nyfz" jdbcType="VARCHAR" />
+    <result column="WLFZ" property="wlfz" jdbcType="VARCHAR" />
+    <result column="SWFZ" property="swfz" jdbcType="VARCHAR" />
+    <result column="HXFZ" property="hxfz" jdbcType="VARCHAR" />
+    <result column="YJFZ" property="yjfz" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="BCHSSL" property="bchssl" jdbcType="VARCHAR" />
+    <result column="FBJD" property="fbjd" jdbcType="VARCHAR" />
+    <result column="BFSJ" property="bfsj" jdbcType="VARCHAR" />
+    <result column="WDMAX" property="wdmax" jdbcType="VARCHAR" />
+    <result column="WDMIN" property="wdmin" jdbcType="VARCHAR" />
+    <result column="SDMAX" property="sdmax" jdbcType="VARCHAR" />
+    <result column="SDMIN" property="sdmin" jdbcType="VARCHAR" />
+    <result column="PLANTBH" property="plantbh" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BH, MC, PIC, BINGY, ZZ, FBTJ, NYFZ, WLFZ, SWFZ, HXFZ, YJFZ, TYPE, BCHSSL, FBJD, BFSJ, 
+    WDMAX, WDMIN, SDMAX, SDMIN, PLANTBH
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="microservice.sc.model.BhmxExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from BHMX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="microservice.sc.model.BhmxExample" >
+    delete from BHMX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="microservice.sc.model.Bhmx" >
+    insert into BHMX (BH, MC, PIC, 
+      BINGY, ZZ, FBTJ, NYFZ, 
+      WLFZ, SWFZ, HXFZ, YJFZ, 
+      TYPE, BCHSSL, FBJD, 
+      BFSJ, WDMAX, WDMIN, 
+      SDMAX, SDMIN, PLANTBH
+      )
+    values (#{bh,jdbcType=VARCHAR}, #{mc,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
+      #{bingy,jdbcType=VARCHAR}, #{zz,jdbcType=VARCHAR}, #{fbtj,jdbcType=VARCHAR}, #{nyfz,jdbcType=VARCHAR}, 
+      #{wlfz,jdbcType=VARCHAR}, #{swfz,jdbcType=VARCHAR}, #{hxfz,jdbcType=VARCHAR}, #{yjfz,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{bchssl,jdbcType=VARCHAR}, #{fbjd,jdbcType=VARCHAR}, 
+      #{bfsj,jdbcType=VARCHAR}, #{wdmax,jdbcType=VARCHAR}, #{wdmin,jdbcType=VARCHAR}, 
+      #{sdmax,jdbcType=VARCHAR}, #{sdmin,jdbcType=VARCHAR}, #{plantbh,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="microservice.sc.model.Bhmx" >
+    insert into BHMX
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bh != null" >
+        BH,
+      </if>
+      <if test="mc != null" >
+        MC,
+      </if>
+      <if test="pic != null" >
+        PIC,
+      </if>
+      <if test="bingy != null" >
+        BINGY,
+      </if>
+      <if test="zz != null" >
+        ZZ,
+      </if>
+      <if test="fbtj != null" >
+        FBTJ,
+      </if>
+      <if test="nyfz != null" >
+        NYFZ,
+      </if>
+      <if test="wlfz != null" >
+        WLFZ,
+      </if>
+      <if test="swfz != null" >
+        SWFZ,
+      </if>
+      <if test="hxfz != null" >
+        HXFZ,
+      </if>
+      <if test="yjfz != null" >
+        YJFZ,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="bchssl != null" >
+        BCHSSL,
+      </if>
+      <if test="fbjd != null" >
+        FBJD,
+      </if>
+      <if test="bfsj != null" >
+        BFSJ,
+      </if>
+      <if test="wdmax != null" >
+        WDMAX,
+      </if>
+      <if test="wdmin != null" >
+        WDMIN,
+      </if>
+      <if test="sdmax != null" >
+        SDMAX,
+      </if>
+      <if test="sdmin != null" >
+        SDMIN,
+      </if>
+      <if test="plantbh != null" >
+        PLANTBH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bh != null" >
+        #{bh,jdbcType=VARCHAR},
+      </if>
+      <if test="mc != null" >
+        #{mc,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="bingy != null" >
+        #{bingy,jdbcType=VARCHAR},
+      </if>
+      <if test="zz != null" >
+        #{zz,jdbcType=VARCHAR},
+      </if>
+      <if test="fbtj != null" >
+        #{fbtj,jdbcType=VARCHAR},
+      </if>
+      <if test="nyfz != null" >
+        #{nyfz,jdbcType=VARCHAR},
+      </if>
+      <if test="wlfz != null" >
+        #{wlfz,jdbcType=VARCHAR},
+      </if>
+      <if test="swfz != null" >
+        #{swfz,jdbcType=VARCHAR},
+      </if>
+      <if test="hxfz != null" >
+        #{hxfz,jdbcType=VARCHAR},
+      </if>
+      <if test="yjfz != null" >
+        #{yjfz,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="bchssl != null" >
+        #{bchssl,jdbcType=VARCHAR},
+      </if>
+      <if test="fbjd != null" >
+        #{fbjd,jdbcType=VARCHAR},
+      </if>
+      <if test="bfsj != null" >
+        #{bfsj,jdbcType=VARCHAR},
+      </if>
+      <if test="wdmax != null" >
+        #{wdmax,jdbcType=VARCHAR},
+      </if>
+      <if test="wdmin != null" >
+        #{wdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="sdmax != null" >
+        #{sdmax,jdbcType=VARCHAR},
+      </if>
+      <if test="sdmin != null" >
+        #{sdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="plantbh != null" >
+        #{plantbh,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="microservice.sc.model.BhmxExample" resultType="java.lang.Integer" >
+    select count(*) from BHMX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update BHMX
+    <set >
+      <if test="record.bh != null" >
+        BH = #{record.bh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mc != null" >
+        MC = #{record.mc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic != null" >
+        PIC = #{record.pic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bingy != null" >
+        BINGY = #{record.bingy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zz != null" >
+        ZZ = #{record.zz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fbtj != null" >
+        FBTJ = #{record.fbtj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nyfz != null" >
+        NYFZ = #{record.nyfz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wlfz != null" >
+        WLFZ = #{record.wlfz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.swfz != null" >
+        SWFZ = #{record.swfz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hxfz != null" >
+        HXFZ = #{record.hxfz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yjfz != null" >
+        YJFZ = #{record.yjfz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bchssl != null" >
+        BCHSSL = #{record.bchssl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fbjd != null" >
+        FBJD = #{record.fbjd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bfsj != null" >
+        BFSJ = #{record.bfsj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wdmax != null" >
+        WDMAX = #{record.wdmax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wdmin != null" >
+        WDMIN = #{record.wdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdmax != null" >
+        SDMAX = #{record.sdmax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdmin != null" >
+        SDMIN = #{record.sdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plantbh != null" >
+        PLANTBH = #{record.plantbh,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update BHMX
+    set BH = #{record.bh,jdbcType=VARCHAR},
+      MC = #{record.mc,jdbcType=VARCHAR},
+      PIC = #{record.pic,jdbcType=VARCHAR},
+      BINGY = #{record.bingy,jdbcType=VARCHAR},
+      ZZ = #{record.zz,jdbcType=VARCHAR},
+      FBTJ = #{record.fbtj,jdbcType=VARCHAR},
+      NYFZ = #{record.nyfz,jdbcType=VARCHAR},
+      WLFZ = #{record.wlfz,jdbcType=VARCHAR},
+      SWFZ = #{record.swfz,jdbcType=VARCHAR},
+      HXFZ = #{record.hxfz,jdbcType=VARCHAR},
+      YJFZ = #{record.yjfz,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      BCHSSL = #{record.bchssl,jdbcType=VARCHAR},
+      FBJD = #{record.fbjd,jdbcType=VARCHAR},
+      BFSJ = #{record.bfsj,jdbcType=VARCHAR},
+      WDMAX = #{record.wdmax,jdbcType=VARCHAR},
+      WDMIN = #{record.wdmin,jdbcType=VARCHAR},
+      SDMAX = #{record.sdmax,jdbcType=VARCHAR},
+      SDMIN = #{record.sdmin,jdbcType=VARCHAR},
+      PLANTBH = #{record.plantbh,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

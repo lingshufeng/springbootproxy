@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.znxd.cloud</groupId>
+    <artifactId>microservice-sc-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>microservice-sc-master</artifactId>
+  <dependencies>
+       <dependency>
+			<groupId>org.springframework.boot</groupId>	
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+      <dependency>
+          <groupId>org.znxd.cloud</groupId>
+          <artifactId>microservice-sc-facade</artifactId>
+          <version>${springboot.sc.facade.version}</version>
+      </dependency>
+
+      <!--ProxyFilter的引入依赖-->
+      <dependency>
+          <groupId>org.mitre.dsmiley.httpproxy</groupId>
+          <artifactId>smiley-http-proxy-servlet</artifactId>
+          <version>1.7</version>
+      </dependency>
+
+
+  </dependencies>
+  <build>
+  <finalName>microservice-sc-master</finalName>
+  <plugins>
+  	<plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <executions>
+              <execution>
+                  <goals>
+                      <goal>repackage</goal>
+                  </goals>
+              </execution>
+          </executions>
+      </plugin>
+
+            <plugin>  
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-war-plugin</artifactId>  
+                <configuration>  
+                    <failOnMissingWebXml>false</failOnMissingWebXml>  
+                </configuration>  
+            </plugin>  
+        </plugins>  
+	<resources>  
+            <!-- 打包时将jsp文件拷贝到META-INF目录下-->  
+            <resource>  
+                <!-- 指定resources插件处理哪个目录下的资源文件 -->  
+                <directory>src/main/webapp</directory>  
+                <!--注意此次必须要放在此目录下才能被访问到-->  
+                <targetPath>META-INF/resources</targetPath>  
+                <includes>  
+                    <include>**/**</include>  
+                </includes>  
+            </resource>  
+            <resource>  
+                <directory>src/main/resources</directory>  
+                <includes>  
+                    <include>**/**</include>  
+                </includes>  
+                <filtering>true</filtering>
+            </resource>  
+        </resources> 
+  </build>
+  <packaging>war</packaging>
+</project>

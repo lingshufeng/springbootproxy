@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans        
+    http://www.springframework.org/schema/beans/spring-beans.xsd        
+    http://code.alibabatech.com/schema/dubbo        
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="sc_consumer" />
+	<dubbo:consumer timeout="60000" retries="0" />
+	<!-- 使用multicast广播注册中心暴露发现服务地址 -->
+	<!-- <dubbo:registry address="multicast://224.5.6.7:1234" /> -->
+
+
+	<!-- 单注册中心配置 -->
+	<dubbo:registry address="zookeeper://localhost:2181" />
+
+	<!-- 多注册中心配置 -->
+	<!-- <dubbo:registry id="nanjingRegistry" address="zookeeper://192.168.1.110:2181" 
+		/> <dubbo:registry id="shanghaiRegistry" address="zookeeper://192.168.1.110:2182" 
+		default="false" /> <dubbo:registry id="hanzhouRegistry" address="zookeeper://192.168.1.110:2183" 
+		default="false" /> <dubbo:registry address="nanjingRegistry,shanghaiRegistry,hanzhouRegistry" 
+		/> -->
+
+	<!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
+
+
+
+	<dubbo:reference id="userService" interface="cloud.gateway.service.UserService" timeout="60000" check="false" version="1.1.0.0"/>
+
+	<dubbo:reference id="sysFuncService" interface="cloud.gateway.service.function.SysFuncService" timeout="60000" check="false" version="1.1.0.0"/>
+
+</beans>

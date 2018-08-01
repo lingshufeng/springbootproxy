@@ -1,0 +1,138 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <artifactId>microservice-sc-service</artifactId>
+  <name>microservice-sc-service</name>
+  <version>${springboot.sc.service.version}</version>
+  <description>microservice-sc-service</description>
+  <parent>
+    <groupId>org.znxd.cloud</groupId>
+    <artifactId>microservice-sc-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../../microservice-sc-parent</relativePath>
+  </parent> 
+	<dependencies>	
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>		
+	    <dependency>
+			<groupId>org.znxd.cloud</groupId>
+			<artifactId>microservice-sc-facade</artifactId>
+			<version>${springboot.sc.facade.version}</version>
+		</dependency> 
+		 <!-- Spring Boot Mybatis 依赖 -->
+       <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- mybatis分页插件依赖 -->
+		<dependency>
+		    <groupId>com.github.pagehelper</groupId>
+		    <artifactId>pagehelper</artifactId>
+            <version>4.1.0</version>
+		</dependency>
+        <!-- Druid数据库连接池组件 -->
+		<!--  <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.18</version>
+        </dependency> -->
+		<!-- oracle的数据库驱动包 -->
+			<!-- <dependency>
+				<groupId>com.oracle</groupId>
+				<artifactId>ojdbc6</artifactId>
+				<version>11.2.0.4.0-atlassian-hosted</version>
+			</dependency> -->
+			<!-- sqlserver数据库驱动 -->
+		 	<dependency>
+	        	<groupId>com.microsoft.sqlserver.jdbc</groupId>
+	        	<artifactId>sqljdbc4</artifactId>
+	        	<version>4.0</version>
+	        </dependency>
+			<!-- <dependency>
+				<groupId>org.apache.geronimo.specs</groupId>
+				<artifactId>geronimo-ejb_3.0_spec</artifactId>
+				<version>1.0.1</version>
+			</dependency> -->
+			 <!--  如果dubbo的配置来自于单独的xml文件，不是来自于spring boot的application配置文件
+ 			      那么，导入dubbo相关包，必须单独导入，不能用spring boot和dubbo的jar包-->
+			<dependency>
+	            <groupId>org.apache.zookeeper</groupId>
+	            <artifactId>zookeeper</artifactId>
+	            <exclusions>
+	            	<exclusion>
+	            		<groupId>org.slf4j</groupId>
+	            		<artifactId>slf4j-log4j12</artifactId>
+	            	</exclusion>
+	            </exclusions>
+			</dependency>
+	        <dependency>
+	            <groupId>com.101tec</groupId>
+	            <artifactId>zkclient</artifactId>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.alibaba</groupId>
+	            <artifactId>dubbo</artifactId>
+	            <exclusions>
+	                <exclusion>
+	                    <groupId>org.springframework</groupId>
+	                    <artifactId>spring</artifactId>
+	                </exclusion>
+	            </exclusions>
+	        </dependency>
+	</dependencies>
+<build>
+<finalName>microservice-sc-service</finalName>
+  <plugins>
+  	<plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <executions>
+              <execution>
+                  <goals>
+                      <goal>repackage</goal>
+                  </goals>
+              </execution>
+          </executions>
+      </plugin>
+      <plugin>  
+                <groupId>org.springframework.boot</groupId>  
+                <artifactId>spring-boot-maven-plugin</artifactId>  
+                <executions>  
+                    <execution>  
+                        <goals>  
+                            <goal>repackage</goal>  
+                        </goals>  
+                    </execution>  
+                </executions>  
+            </plugin>  
+            <plugin>  
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-war-plugin</artifactId>  
+                <configuration>  
+                    <failOnMissingWebXml>false</failOnMissingWebXml>  
+                </configuration>  
+            </plugin>  
+        </plugins>  
+	<resources>  
+            <!-- 打包时将jsp文件拷贝到META-INF目录下-->  
+            <resource>  
+                <!-- 指定resources插件处理哪个目录下的资源文件 -->  
+                <directory>src/main/webapp</directory>  
+                <!--注意此次必须要放在此目录下才能被访问到-->  
+                <targetPath>META-INF/resources</targetPath>  
+                <includes>  
+                    <include>**/**</include>  
+                </includes>  
+            </resource>  
+            <resource>  
+                <directory>src/main/resources</directory>  
+                <includes>  
+                    <include>**/**</include>  
+                </includes>  
+                <filtering>false</filtering>  
+            </resource>  
+        </resources> 
+  </build>
+</project>
