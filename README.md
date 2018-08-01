@@ -89,7 +89,9 @@ proxy.test.servlet_url_two=/testtwo/*
 proxy.test.target_url_two=http://localhost:30002
 ```
 &emsp;&emsp;上边的配置简单介绍一下，对于`testone/*` 这样的写法，意思就是当你的请求路径以`testone` 开头，比如`http://localhost:30000/testone/test/get1` 这样的路径，它请求的真实路径是`http://localhost:30001/test/get1` 。主要就是将`testone` 替换成对应的被代理路径而已，<font color='#f00'>**`*` 的意思就是实际请求项目中接口的路径！！！**</font>
+
 &emsp;&emsp;`30001` 端口即`suiteone`项目，`30002` 端口即`suitetwo` 项目，下载项目之后，分别启动`master` 、`suiteone` 、`suitetwo` 项目的启动类，启动完成后，访问`http://localhost:30000/testone/test/get1` ，即会返回`suiteone` 项目`test/get1` 接口的内容。
+
 &emsp;&emsp;这种配置对`get` 、`post` 请求都有效。
 &emsp;&emsp;以上即是完整的配置内容。
 &emsp;&emsp;如果有不懂的，可以下载下来项目看一下。[GitHub地址](https://github.com/lingshufeng/springbootproxy)
