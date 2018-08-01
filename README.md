@@ -1,24 +1,25 @@
 ### springboot 配置服务代理
 &emsp;&emsp;有时候，我们可能有下边这样的需求：
-![image](https://img-blog.csdn.net/20180801081630986?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dvaGFxaXlp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+(https://github.com/lingshufeng/images/blob/master/images/1.png)
 即，针对于分布式服务，我们会有多种业务接口服务，但是服务器上可能只要求开放一个服务的端口，比如上图的`restA`项目端口是对外开放的，但是`restB`项目端口并未对外开放，这样带来的问题就是，用户无法直接请求`restB`项目。
 &emsp;&emsp;那就想到了可以通过访问`restA` ,请求路径符合一定规范的时候，比如`http://ip:port/test` ,当请求中以`rest` 开头时，可以再转发请求到`restB` 项目中即可。
 
 &emsp;&emsp;当然`代理转发` ，有很多的解决办法，`nginx`  、`zuul` 等都可以实现，但是`nginx` 虽然简单，但是总要多装一个服务；`zuul` 配置较为麻烦。
 &emsp;&emsp;经过百度后，发现了一个特别简单的配置，即这里要说的东西，`ServletRegistrationBean`的注入，相当于是引入`servlet` ，没有具体看过 。
-![这里写图片描述](https://img-blog.csdn.net/20180801123215773?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dvaGFxaXlp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-###下面写一下配置步骤：
-#####1、项目结构及介绍
+(https://github.com/lingshufeng/images/blob/master/images/%E3%80%90%E8%A1%A8%E6%83%85%E3%80%91%E7%8C%AB%E7%9C%AF%E7%9C%BC%E7%9D%9B.png)
+
+### 下面写一下配置步骤：
+##### 1、项目结构及介绍
 &emsp;&emsp;下面是我的项目结构，以下选中蓝色的项目为我们要配置的项目，其他的项目先忽略，是我们基于`dubbo` 和`zookeeper` 配置的时候用的。
 &emsp;&emsp;项目已放到`GitHub` 上，下载[项目GitHub地址](https://github.com/lingshufeng/springbootproxy)
-![这里写图片描述](https://img-blog.csdn.net/20180801124854617?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dvaGFxaXlp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+(https://github.com/lingshufeng/images/blob/master/images/2.png)
 &emsp;&emsp;关于这个项目的介绍是下边这样的，再配张图来介绍下：
 
-![这里写图片描述](https://img-blog.csdn.net/20180801125214429?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dvaGFxaXlp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+(https://github.com/lingshufeng/images/blob/master/images/3.png)
 &emsp;&emsp;`suiteone` 、`suitetwo` 项目端口没有外放，用户不能直接访问，而`master`项目是可以直接访问的，所以用户是通过访问`master` 项目，再由`master` 项目对请求代理转发到这两个项目中。
-#####2、具体配置步骤
-&emsp;&emsp;主要的配置很少，都在`master` 项目中。
-######（1）引入依赖：
+##### 2、具体配置步骤
+&emsp;&emsp; 主要的配置很少，都在`master` 项目中。
+###### （1）引入依赖：
 
 ```
  <!--ProxyFilter的引入依赖-->
@@ -28,8 +29,8 @@
           <version>1.7</version>
       </dependency>
 ```
-######（2）、配置一个配置类：
-&emsp;&emsp;该类可以参照下载下来的，`master` 项目中的配置。
+###### （2）、配置一个配置类：
+&emsp;&emsp;该类可以参照下载下来的`master` 项目中的配置。
 ```
 package microservice.sc.config;
 
@@ -74,7 +75,7 @@ public class ProxyServletConfiguration implements EnvironmentAware {
 }
 
 ```
-######（3）、配置代理地址：
+###### （3）、配置代理地址：
 &emsp;&emsp;到`master` 项目的主配置文件，即`application.properties` 文件中，加入以下内容：
 
 ```
